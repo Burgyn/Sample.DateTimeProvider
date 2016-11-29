@@ -6,8 +6,9 @@ When writing unit tests, you probably met with the question of how to test the m
 
 It is certainly a number of ways this problem can be solved. The most frequent recommendations are however two:
 
-Methods that calculation is depends on the current date and time should get this date as an input parameter. This means that you will not use `DateTime.Now` in the body of the method, but need send a `DateTime` type parameter sent to you by your method. Thus, send the test date what you need. Of course, not always it is possible and it is not always desirable.
-Do not use directly `DateTime.Now`, but have custom DateTime Provider
+1. Methods that calculation is depends on the current date and time should get this date as an input parameter. This means that you will not use `DateTime.Now` in the body of the method, but need send a `DateTime` type parameter sent to you by your method. Thus, send the test date what you need. Of course, not always it is possible and it is not always desirable.
+
+2. Do not use directly `DateTime.Now`, but have custom DateTime Provider
  
 
 #Custom DateTimeProvider
