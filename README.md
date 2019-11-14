@@ -1,7 +1,7 @@
 # DateTimeProvider
 This repository show haw we can testing methods which dependent on `DateTime.Now`.
 
-# Description
+## Description
 When writing unit tests, you probably met with the question of how to test the method, the calculation of which is dependent on `DateTime.Now`. `DateTime.Now` always returns a new value according to the current time, so testing this method is not directly possible. 
 
 It is certainly a number of ways this problem can be solved. The most frequent recommendations are however two:
@@ -11,11 +11,11 @@ It is certainly a number of ways this problem can be solved. The most frequent r
 2. Do not use directly `DateTime.Now`, but have custom DateTime Provider
  
 
-#Custom DateTimeProvider
+## Custom DateTimeProvider
 
 Under own DateTimeProvider think custom class, which we will ask for the current date and time. And it will be possible inject the current date. An example of this class:
 
-```
+```CSharp
 public class DateTimeProvider : IDisposable 
 { 
     [ThreadStatic] 
@@ -60,7 +60,7 @@ The normal used in the method is the same as when you use the DateTime.
 
  
 
-```
+```CSharp
 private void MakeTransaction(Transaction transaction) 
 { 
     transaction.TransactionDate = DateTimeProvider.Now; 
