@@ -87,7 +87,7 @@ public class BankAccountShould
  
             var lastTransaction = bankAccount.Transactions.Last(); 
  
-            Assert.IsTrue(expectedDateTime.Equals(bankAccount.Transactions[0].TransactionDate)); 
+            Assert.AreEquel(expectedDateTime, bankAccount.Transactions[0].TransactionDate); 
         } 
     } 
 } 
