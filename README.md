@@ -18,8 +18,7 @@ Under own DateTimeProvider think custom class, which we will ask for the current
 ```CSharp
 public class DateTimeProvider : IDisposable 
 { 
-    [ThreadStatic] 
-    private static DateTime? _injectedDateTime; 
+    private static AsyncLocal<DateTime?> _injectedDateTime = new AsyncLocal<DateTime?>(); 
  
     private DateTimeProvider() 
     { 
@@ -31,13 +30,7 @@ public class DateTimeProvider : IDisposable
     /// <value> 
     /// The DateTime now. 
     /// </value> 
-    public static DateTime Now 
-    { 
-        get 
-        { 
-            return _injectedDateTime ?? DateTime.Now; 
-        } 
-    } 
+    public static DateTime Now => return _injectedDateTime.Value ?? DateTime.Now;
  
     /// <summary> 
     /// Injects the actual date time. 
@@ -45,14 +38,14 @@ public class DateTimeProvider : IDisposable
     /// <param name="actualDateTime">The actual date time.</param> 
     public static IDisposable InjectActualDateTime(DateTime actualDateTime) 
     { 
-        _injectedDateTime = actualDateTime; 
+        _injectedDateTime.Value = actualDateTime; 
  
         return new DateTimeProvider(); 
     } 
  
     public void Dispose() 
     { 
-        _injectedDateTime = null; 
+        _injectedDateTime.Value = null; 
     } 
 } 
 ```
