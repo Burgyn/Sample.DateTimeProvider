@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace UnitTestingExamples.Providers
 {
@@ -11,12 +8,10 @@ namespace UnitTestingExamples.Providers
     /// </summary>
     public class DateTimeProvider : IDisposable
     {
-        [ThreadStatic]
-        private static DateTime? _injectedDateTime;
+        private static AsyncLocal<DateTime?> _injectedDateTime = new AsyncLocal<DateTime?>();
 
         private DateTimeProvider()
         {
-
         }
 
         /// <summary>
@@ -26,12 +21,7 @@ namespace UnitTestingExamples.Providers
         /// The DateTime now.
         /// </value>
         public static DateTime Now
-        {
-            get
-            {
-                return _injectedDateTime ?? DateTime.Now;
-            }
-        }
+            => _injectedDateTime.Value ?? DateTime.Now;
 
         /// <summary>
         /// Injects the actual date time.
@@ -39,14 +29,14 @@ namespace UnitTestingExamples.Providers
         /// <param name="actualDateTime">The actual date time.</param>
         public static IDisposable InjectActualDateTime(DateTime actualDateTime)
         {
-            _injectedDateTime = actualDateTime;
+            _injectedDateTime.Value = actualDateTime;
 
             return new DateTimeProvider();
         }
 
         public void Dispose()
         {
-            _injectedDateTime = null;
+            _injectedDateTime.Value = null;
         }
     }
 }

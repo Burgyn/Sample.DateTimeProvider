@@ -17,24 +17,12 @@ namespace UnitTestingExamples.BankExample
         /// <summary>
         /// Actual bank account balance.
         /// </summary>
-        public double Balance
-        {
-            get
-            {
-                return _transactions.Sum(p => p.Amount);
-            }
-        }
+        public double Balance =>_transactions.Sum(p => p.Amount);
 
         /// <summary>
         /// Existing transactions.
         /// </summary>        
-        public List<Transaction> Transactions
-        {
-            get
-            {
-                return _transactions;
-            }
-        }
+        public List<Transaction> Transactions => _transactions;
 
         /// <summary>
         /// Deposits the money.
