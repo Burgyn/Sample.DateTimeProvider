@@ -30,7 +30,7 @@ public class DateTimeProvider : IDisposable
     /// <value> 
     /// The DateTime now. 
     /// </value> 
-    public static DateTime Now => return _injectedDateTime.Value ?? DateTime.Now;
+    public static DateTime Now => _injectedDateTime.Value ?? DateTime.Now;
  
     /// <summary> 
     /// Injects the actual date time. 
